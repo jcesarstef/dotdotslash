@@ -1,5 +1,19 @@
-# dot dot slash
+# dotdotslash
 An tool to help you search for Directory Transversal Vulnerabilities
+
+# Benchmarks
+Platforms that I tested to validate tool efficiency:
+* [DVWA](https://github.com/ethicalhack3r/DVWA) (low/medium/high)
+* [bWAPP](http://www.itsecgames.com/) (low/medium/high)
+
+
+# Screenshots
+
+![Screenshot](https://raw.githubusercontent.com/jcesarstef/dotdotslash/master/poc1.png)
+
+![Screenshot](https://raw.githubusercontent.com/jcesarstef/dotdotslash/master/poc2.png)
+
+
 
 # Instalation
 You can download the last version cloning this repository

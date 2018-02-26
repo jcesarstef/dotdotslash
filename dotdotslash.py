@@ -18,7 +18,7 @@ from urllib import request
 # for key, value in windows.items(): print(key)
 
 
-parser = argparse.ArgumentParser(description = 'dot dot slash - A automated Path Transversal Tester. Created by @jcesrstef.')
+parser = argparse.ArgumentParser(description = 'dot dot slash - A automated Path Traversal Tester. Created by @jcesrstef.')
 parser.add_argument('--url', action = 'store', dest = 'url', required = True, help = 'Url to attack.')
 parser.add_argument('--string', action = 'store', dest = 'string', required = True, help = 'String in --url to attack. Ex: document.pdf')
 parser.add_argument('--cookie', action = 'store', dest = 'cookie', required = False, help = 'Document cookie.')
@@ -32,7 +32,7 @@ banner = "\
 | (_| | (_) | |_  | (_| | (_) | |_  \__ \ | (_| \__ \ | | |\n\
  \__,_|\___/ \__|  \__,_|\___/ \__| |___/_|\__,_|___/_| |_|\n\
                                                            \n\
-Automated Path Transversal Tester\n\
+Automated Path Traversal Tester\n\
 version 0.0.2\n\
 Created by Julio Cesar Stefanutto (@jcesarstef)\n\
 \

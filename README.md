@@ -1,5 +1,5 @@
 # dotdotslash
-An tool to help you search for Directory Transversal Vulnerabilities
+An tool to help you search for Directory Traversal Vulnerabilities
 
 # Benchmarks
 Platforms that I tested to validate tool efficiency:
@@ -30,8 +30,6 @@ This tool has made to work with Python3
 python3 dotdotslash.py --help
 
 usage: dotdotslash.py [-h] --url URL --string STRING [--cookie COOKIE]
-
-dot dot slash - A automated Path Transversal Tester. Created by @jcesrstef.
 
 optional arguments:
   -h, --help       show this help message and exit

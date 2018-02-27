@@ -13,7 +13,7 @@ Platforms that I tested to validate tool efficiency:
 
 ![Screenshot](https://raw.githubusercontent.com/jcesarstef/dotdotslash/master/poc2.png)
 
-
+![Screenshot](https://raw.githubusercontent.com/jcesarstef/dotdotslash/master/poc3.png)
 
 # Instalation
 You can download the last version cloning this repository

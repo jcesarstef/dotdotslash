@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 import re
 import argparse
-import time
 from match import *
-from urllib import request
+import requests
+from http.cookies import SimpleCookie
+
 
 #TODO
 # add -f --file
@@ -52,6 +53,20 @@ class bcolors:
 	UNDERLINE = '\033[4m'
 
 
+class request(object):
+	def query(self, url, cookie=None):
+		self.raw = "aaaaaaaaaaaaaaaaaaaaaA"
+		self.code = "200"
+		
+		if cookie:
+			rawdata = "Cookie: " + cookie
+			cookie = SimpleCookie()
+			cookie.load(rawdata)
+
+		req = requests.get(url, cookies=cookie, allow_redirects=False)
+		self.raw = req.text
+		self.code = req.status_code
+
 
 def forloop():	
 	count = 0
@@ -60,16 +75,15 @@ def forloop():
 			for word in match.keys():
 				rewrite = (var * count) + word
 				fullrewrite = re.sub(arguments.string,  rewrite , arguments.url)
-				req = request.Request(fullrewrite)
-				if (arguments.cookie):
-					req.add_header("Cookie", arguments.cookie)
-				resp = request.urlopen(req)
+				req = request()
+				req.query(fullrewrite)
 				
-				catchdata = re.findall(str(match[word]), resp.read().decode())
+				catchdata = re.findall(str(match[word]), req.raw)
 				if (len(catchdata) != 0):
-					print(bcolors.OKGREEN + "\n[" + str(resp.code) + "] " + bcolors.ENDC + fullrewrite)
-					print(" Content Found: " + str(len(catchdata)))
+					print(bcolors.OKGREEN + "\n[" + str(req.code) + "] " + bcolors.ENDC + fullrewrite)
+					print(" Contents Found: " + str(len(catchdata)))
 				icount = 0
+
 				# Print match
 				for i in catchdata:
 					print(" " + bcolors.FAIL + str(i) + bcolors.ENDC)

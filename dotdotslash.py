@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import re
 import argparse
-from match import *
+import time
+from match import dotvar, match, befvar
 import requests
 from http.cookies import SimpleCookie
 
@@ -67,30 +68,29 @@ class request(object):
 		self.raw = req.text
 		self.code = req.status_code
 
-
 def forloop():	
 	count = 0
 	while (count != arguments.depth):
 		for var in dotvar:
-			for word in match.keys():
-				rewrite = (var * count) + word
-				fullrewrite = re.sub(arguments.string,  rewrite , arguments.url)
-				req = request()
-				req.query(fullrewrite)
-				
-				catchdata = re.findall(str(match[word]), req.raw)
-				if (len(catchdata) != 0):
-					print(bcolors.OKGREEN + "\n[" + str(req.code) + "] " + bcolors.ENDC + fullrewrite)
-					print(" Contents Found: " + str(len(catchdata)))
-				icount = 0
-
-				# Print match
-				for i in catchdata:
-					print(" " + bcolors.FAIL + str(i) + bcolors.ENDC)
-					icount = icount + 1
-					if (icount > 6):
-						print(" [...]")
-						break
+			for bvar in befvar:
+				for word in match.keys():
+					rewrite = bvar + (var * count) + word
+					fullrewrite = re.sub(arguments.string,  rewrite , arguments.url)
+					req = request()
+					req.query(fullrewrite)
+					catchdata = re.findall(str(match[word]), req.raw)
+					if (len(catchdata) != 0):
+						print(bcolors.OKGREEN + "\n[" + str(req.code) + "] " + bcolors.ENDC + fullrewrite)
+						print(" Contents Found: " + str(len(catchdata)))
+					icount = 0
+					# Print match
+					for i in catchdata:
+						print(" " + bcolors.FAIL + str(i) + bcolors.ENDC)
+						icount = icount + 1
+						if (icount > 6):
+							print(" [...]")
+							break
 		count = count + 1
 
 forloop()
+

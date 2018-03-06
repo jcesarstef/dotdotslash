@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import re
 import argparse
-import time
+import sys
 from match import dotvar, match, befvar
 import requests
 from http.cookies import SimpleCookie
@@ -14,6 +14,8 @@ from http.cookies import SimpleCookie
 # mutiple headers
 # solve 302 that turn 200
 # save in sqlite/csv
+# colors on http_code
+# threads
 
 parser = argparse.ArgumentParser(description = 'dot dot slash - A automated Path Traversal Tester. Created by @jcesrstef.')
 parser.add_argument('--url', '-u',action = 'store', dest = 'url', required = True, help = 'Url to attack.')
@@ -33,6 +35,8 @@ banner = "\
 Automated Path Traversal Tester\n\
 version 0.0.2\n\
 Created by Julio Cesar Stefanutto (@jcesarstef)\n\
+\n\
+Starting run in: \033[94m"+ arguments.url + "\033[0m\n\
 \
 "
 print(banner)
@@ -63,10 +67,14 @@ class request(object):
 		self.raw = req.text
 		self.code = req.status_code
 
-def forloop():	
+def forloop():
+	if not (re.match(arguments.string, arguments.url)):
+		sys.exit("String: " + bcolors.WARNING + arguments.string + bcolors.ENDC + " not found in url: " + bcolors.FAIL + arguments.url + "\n")
+		
 	count = 0
 	duplicate = []
 	while (count != (arguments.depth + 1)):
+		print("[+] Depth: "+ str(count))
 		for var in dotvar:
 			for bvar in befvar:
 				for word in match.keys():

@@ -27,15 +27,22 @@ This tool was made to work with Python3
 # Usage
 
 ```
-python3 dotdotslash.py --help
-
+> python3 dotdotslash.py --help
 usage: dotdotslash.py [-h] --url URL --string STRING [--cookie COOKIE]
+                      [--depth DEPTH] [--verbose]
+
+dot dot slash - A automated Path Traversal Tester. Created by @jcesrstef.
 
 optional arguments:
-  -h, --help       show this help message and exit
-  --url URL        Url to attack.
-  --string STRING  String in --url to attack. Ex: document.pdf
-  --cookie COOKIE  Document cookie.
+  -h, --help            show this help message and exit
+  --url URL, -u URL     Url to attack.
+  --string STRING, -s STRING
+                        String in --url to attack. Ex: document.pdf
+  --cookie COOKIE, -c COOKIE
+                        Document cookie.
+  --depth DEPTH, -d DEPTH
+                        How deep we will go?
+  --verbose, -v         Show requests
 ```
 
 Example:

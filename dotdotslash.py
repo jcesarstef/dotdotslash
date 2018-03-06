@@ -6,7 +6,6 @@ from match import dotvar, match, befvar
 import requests
 from http.cookies import SimpleCookie
 
-
 #TODO
 # add -f --file
 # add --os
@@ -16,17 +15,13 @@ from http.cookies import SimpleCookie
 # solve 302 that turn 200
 # save in sqlite/csv
 
-
-# for key, value in windows.items(): print(key)
-
-
 parser = argparse.ArgumentParser(description = 'dot dot slash - A automated Path Traversal Tester. Created by @jcesrstef.')
-parser.add_argument('--url', action = 'store', dest = 'url', required = True, help = 'Url to attack.')
-parser.add_argument('--string', action = 'store', dest = 'string', required = True, help = 'String in --url to attack. Ex: document.pdf')
-parser.add_argument('--cookie', action = 'store', dest = 'cookie', required = False, help = 'Document cookie.')
-parser.add_argument('--depth', action = 'store', dest = 'depth', required = False, type = int, default = '6', help = 'How deep we will go?')
+parser.add_argument('--url', '-u',action = 'store', dest = 'url', required = True, help = 'Url to attack.')
+parser.add_argument('--string', '-s', action = 'store', dest = 'string', required = True, help = 'String in --url to attack. Ex: document.pdf')
+parser.add_argument('--cookie', '-c',action = 'store', dest = 'cookie', required = False, help = 'Document cookie.')
+parser.add_argument('--depth', '-d', action = 'store', dest = 'depth', required = False, type = int, default = '6', help = 'How deep we will go?')
+parser.add_argument('--verbose', '-v', action = 'store_true', required = False, help = 'Show requests')
 arguments = parser.parse_args()
-
 
 banner = "\
      _       _         _       _         _           _     \n\
@@ -70,27 +65,36 @@ class request(object):
 
 def forloop():	
 	count = 0
-	while (count != arguments.depth):
+	duplicate = []
+	while (count != (arguments.depth + 1)):
 		for var in dotvar:
 			for bvar in befvar:
 				for word in match.keys():
 					rewrite = bvar + (var * count) + word
-					fullrewrite = re.sub(arguments.string,  rewrite , arguments.url)
-					req = request()
-					req.query(fullrewrite)
-					catchdata = re.findall(str(match[word]), req.raw)
-					if (len(catchdata) != 0):
-						print(bcolors.OKGREEN + "\n[" + str(req.code) + "] " + bcolors.ENDC + fullrewrite)
-						print(" Contents Found: " + str(len(catchdata)))
-					icount = 0
-					# Print match
-					for i in catchdata:
-						print(" " + bcolors.FAIL + str(i) + bcolors.ENDC)
-						icount = icount + 1
-						if (icount > 6):
-							print(" [...]")
-							break
-		count = count + 1
+					fullrewrite = re.sub(arguments.string,  rewrite, arguments.url)
+
+					if fullrewrite not in duplicate:
+						req = request()
+						req.query(fullrewrite)
+						catchdata = re.findall(str(match[word]), req.raw)
+						if (len(catchdata) != 0):
+							print(bcolors.OKGREEN + "\n[" + str(req.code) + "] " + bcolors.ENDC + fullrewrite)
+							print(" Contents Found: " + str(len(catchdata)))
+						else:
+							if arguments.verbose:
+								print("[" + str(req.code) + "] " + fullrewrite)
+
+						icount = 0
+						# Print match
+						for i in catchdata:
+							print(" " + bcolors.FAIL + str(i) + bcolors.ENDC)
+							icount = icount + 1
+							if (icount > 6):
+								print(" [...]")
+								break
+							if arguments.verbose:
+								time.sleep(0)
+					duplicate.append(fullrewrite)
+		count += 1
 
 forloop()
-

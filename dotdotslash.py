@@ -68,8 +68,8 @@ class request(object):
 		self.code = req.status_code
 
 def forloop():
-	if not (re.match(arguments.string, arguments.url)):
-		sys.exit("String: " + bcolors.WARNING + arguments.string + bcolors.ENDC + " not found in url: " + bcolors.FAIL + arguments.url + "\n")
+#	if not (re.match(arguments.string, arguments.url)):
+#		sys.exit("String: " + bcolors.WARNING + arguments.string + bcolors.ENDC + " not found in url: " + bcolors.FAIL + arguments.url + "\n")
 		
 	count = 0
 	duplicate = []

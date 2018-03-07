@@ -54,10 +54,7 @@ class bcolors:
 
 
 class request(object):
-	def query(self, url, cookie=None):
-		self.raw = "aaaaaaaaaaaaaaaaaaaaaA"
-		self.code = "200"
-		
+	def query(self, url, cookie=None):		
 		if cookie:
 			rawdata = "Cookie: " + cookie
 			cookie = SimpleCookie()
@@ -68,8 +65,8 @@ class request(object):
 		self.code = req.status_code
 
 def forloop():
-#	if not (re.match(arguments.string, arguments.url)):
-#		sys.exit("String: " + bcolors.WARNING + arguments.string + bcolors.ENDC + " not found in url: " + bcolors.FAIL + arguments.url + "\n")
+	if str(arguments.string) not in str(arguments.url):
+		sys.exit("String: " + bcolors.WARNING + arguments.string + bcolors.ENDC + " not found in url: " + bcolors.FAIL + arguments.url + "\n")
 		
 	count = 0
 	duplicate = []

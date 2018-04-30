@@ -54,7 +54,7 @@ python3 dotdotslash.py \
 --cookie "PHPSESSID=089b49151627773d699c277c769d67cb; security_level=3"
 
 ```
-# Links
-* My twitter: https://twitter.com/jcesarstef
+# Let Me Know What You Think
+* My Twitter: https://twitter.com/jcesarstef
 * My Linkedin: https://www.linkedin.com/in/jcesarstef
 * My Blog(Brazilian Portuguese only for now): http://www.inseguro.com.br

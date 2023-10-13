@@ -41,7 +41,8 @@ class request(object):
             cookie = SimpleCookie()
             cookie.load(rawdata)
 
-        req = requests.get(url, cookies=cookie, allow_redirects=False)
+        #if skip ssl - makes requests with verify=False 
+        req = requests.get(url, cookies=cookie, allow_redirects=False, verify=False) if arguments.skip_ssl else requests.get(url, cookies=cookie, allow_redirects=False)
         self.raw = req.text
         self.code = req.status_code
 
@@ -58,7 +59,7 @@ def forloop():
             for bvar in befvar:
                 for word in match.keys():
                     rewrite = bvar + (var * count) + word
-                    fullrewrite = re.sub(arguments.string, rewrite, arguments.url)
+                    fullrewrite = arguments.url.replace(arguments.string, rewrite)
 
                     if fullrewrite not in duplicate:
                         req = request()
@@ -94,6 +95,7 @@ if __name__ == '__main__':
     parser.add_argument('--cookie', '-c', action='store', dest='cookie', required=False, help='Document cookie.')
     parser.add_argument('--depth', '-d', action='store', dest='depth', required=False, type=int, default='6', help='How deep we will go?')
     parser.add_argument('--verbose', '-v', action='store_true', required=False, help='Show requests')
+    parser.add_argument('--skip_ssl', '-l', action='store_true', required=False, help='If should skip ssl validation')
     arguments = parser.parse_args()
 
     banner = "\
@@ -110,6 +112,10 @@ if __name__ == '__main__':
     Starting run in: \033[94m" + arguments.url + "\033[0m\n\
     \
     "
+    print(arguments.skip_ssl)
+
+    if arguments.skip_ssl:
+        requests.urllib3.disable_warnings()
     print(banner)
     forloop()
 

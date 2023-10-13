@@ -35,14 +35,12 @@ dot dot slash - A automated Path Traversal Tester. Created by @jcesrstef.
 
 optional arguments:
   -h, --help            show this help message and exit
-  --url URL, -u URL     Url to attack.
-  --string STRING, -s STRING
-                        String in --url to attack. Ex: document.pdf
-  --cookie COOKIE, -c COOKIE
-                        Document cookie.
-  --depth DEPTH, -d DEPTH
-                        How deep we will go?
-  --verbose, -v         Show requests
+  --url URL, -u URL Url to attack.
+  --string STRING, -s STRING  String in --url to attack. Ex: document.pdf
+  --cookie COOKIE, -c COOKIE  Document cookie.
+  --depth DEPTH, -d DEPTH How deep we will go?
+  --verbose, -v   Show requests
+  --skip_ssl, -l  If ssl certificate should be validates
 ```
 
 Example:

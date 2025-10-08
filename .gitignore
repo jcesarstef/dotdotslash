@@ -1,0 +1,8 @@
+# ignore env dir
+env/
+
+# ignore every cursor plan files with prefix cp_*
+cp_*.md
+
+# ignore pychache
+__pycache__/
